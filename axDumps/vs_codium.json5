@@ -1,0 +1,96 @@
+{
+  "AXActivationPoint" : "<AXValue 0x600000958a80> {value = x:-1.000000 y:1170.000000 type = kAXValueCGPointType}",
+  "AXCloseButton" : {
+    "AXEnabled" : 1,
+    "AXParent" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXRole" : "AXButton",
+    "AXSubrole" : "AXCloseButton",
+    "AXTopLevelUIElement" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXWindow" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "Ddwm.AxFailed" : "AXTitle",
+    "Ddwm.AxIgnored" : "AXFrame, AXSize, AXFocused, AXHelp, AXPosition, AXRoleDescription, AXEdited"
+  },
+  "AXDocument" : "",
+  "AXFocused" : 0,
+  "AXFrame" : "<AXValue 0x6000012ebcc0> {value = x:900.000000 y:44.000000 w:900.000000 h:1124.000000 type = kAXValueCGRectType}",
+  "AXFullScreen" : 0,
+  "AXFullScreenButton" : {
+    "AXEnabled" : 1,
+    "AXParent" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXRole" : "AXButton",
+    "AXSubrole" : "AXFullScreenButton",
+    "AXTopLevelUIElement" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXWindow" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "Ddwm.AxFailed" : "AXTitle",
+    "Ddwm.AxIgnored" : "AXFrame, AXSize, AXFocused, AXChildren, AXHelp, AXPosition, AXRoleDescription"
+  },
+  "AXMain" : 1,
+  "AXMinimizeButton" : {
+    "AXEnabled" : 1,
+    "AXParent" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXRole" : "AXButton",
+    "AXSubrole" : "AXMinimizeButton",
+    "AXTopLevelUIElement" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXWindow" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "Ddwm.AxFailed" : "AXTitle",
+    "Ddwm.AxIgnored" : "AXFrame, AXSize, AXFocused, AXHelp, AXPosition, AXRoleDescription"
+  },
+  "AXMinimized" : 0,
+  "AXModal" : 0,
+  "AXParent" : "<AXUIElement Application 0x60000095c4e0> {pid=93641}",
+  "AXPosition" : "<AXValue 0x6000009942d0> {value = x:900.000000 y:44.000000 type = kAXValueCGPointType}",
+  "AXRole" : "AXWindow",
+  "AXSections" : [
+    "{\n    SectionDescription = Content;\n    SectionObject = \"<AXUIElement 0x6000009451a0> {pid=93641}\";\n    SectionUniqueID = AXContent;\n}",
+    "{\n    SectionObject = \"<AXUIElement 0x600000945f20> {pid=93641}\";\n    SectionUniqueID = AXContainer;\n}"
+  ],
+  "AXSize" : "<AXValue 0x60000095c4e0> {value = w:900.000000 h:1124.000000 type = kAXValueCGSizeType}",
+  "AXSubrole" : "AXStandardWindow",
+  "AXTitle" : "Settings",
+  "AXZoomButton" : {
+    "AXEnabled" : 1,
+    "AXParent" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXRole" : "AXButton",
+    "AXSubrole" : "AXFullScreenButton",
+    "AXTopLevelUIElement" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXWindow" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "Ddwm.AxFailed" : "AXTitle",
+    "Ddwm.AxIgnored" : "AXFrame, AXSize, AXFocused, AXChildren, AXHelp, AXPosition, AXRoleDescription"
+  },
+  "Ddwm.AXApp" : {
+    "AXFocusedWindow" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXFrontmost" : 1,
+    "AXFunctionRowTopLevelElements" : [
+
+    ],
+    "AXMainWindow" : "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")",
+    "AXManualAccessibility" : 0,
+    "AXMenuBar" : "<AXUIElement 0x60000095c4e0> {pid=93641}",
+    "AXRole" : "AXApplication",
+    "AXTitle" : "VSCodium",
+    "AXWindows" : [
+      "AXUIElement(AxWindowId=1754, title=\"Settings\", role=\"AXWindow\", subrole=\"AXStandardWindow\")"
+    ],
+    "Ddwm.AxFailed" : "AXFunctionRowTopLevelElements, AXFrame, AXFocusedUIElement, AXExtrasMenuBar, AXSize, AXPosition",
+    "Ddwm.AxIgnored" : "AXChildren, AXChildrenInNavigationOrder, AXEnhancedUserInterface, AXPreferredLanguage, AXRoleDescription, AXHidden",
+    "Ddwm.AxWritable" : "AXManualAccessibility, AXFrontmost"
+  },
+  "Ddwm.App.appBundleId" : "com.vscodium",
+  "Ddwm.App.nsApp.activationPolicy" : "regular",
+  "Ddwm.App.nsApp.execPath" : "file:///Applications/VSCodium.app/Contents/MacOS/Electron",
+  "Ddwm.App.pid" : 93641,
+  "Ddwm.App.version" : "1.103.25610",
+  "Ddwm.App.versionShort" : "1.103.25610",
+  "Ddwm.AxFailed" : "AXFrame, AXGrowArea, AXActivationPoint, AXProxy, AXDefaultButton, AXTitleUIElement, AXCancelButton, AXToolbarButton",
+  "Ddwm.AxIgnored" : "AXChildrenInNavigationOrder, AXChildren, AXRoleDescription",
+  "Ddwm.AxUiElementWindowType" : "window",
+  "Ddwm.AxUiElementWindowType_isDialogHeuristic" : false,
+  "Ddwm.AxWritable" : "AXFullScreen, AXPosition, AXSections, AXMain, AXMinimized, AXSize",
+  "Ddwm.axWindowId" : 1754,
+  "Ddwm.macOS.version" : "Version 15.6.1 (Build 24G90)",
+  "Ddwm.on-window-detected" : [
+
+  ],
+  "Ddwm.treeNodeParent" : "Optional(AppBundle.TilingContainer)",
+  "Ddwm.workspace" : "1"
+}

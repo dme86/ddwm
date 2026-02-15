@@ -1,0 +1,275 @@
+= ddwm Commands
+include::util/site-attributes.adoc[]
+
+include::util/header.adoc[]
+
+Commands documentation is also available as manpages.
+
+== balance-sizes
+----
+include::ddwm-balance-sizes.adoc[tags=synopsis]
+----
+include::ddwm-balance-sizes.adoc[tags=purpose]
+include::ddwm-balance-sizes.adoc[tags=body]
+
+== close
+----
+include::ddwm-close.adoc[tags=synopsis]
+----
+include::ddwm-close.adoc[tags=purpose]
+include::ddwm-close.adoc[tags=body]
+
+== close-all-windows-but-current
+----
+include::ddwm-close-all-windows-but-current.adoc[tags=synopsis]
+----
+include::ddwm-close-all-windows-but-current.adoc[tags=purpose]
+include::ddwm-close-all-windows-but-current.adoc[tags=body]
+
+== enable
+----
+include::ddwm-enable.adoc[tags=synopsis]
+----
+include::ddwm-enable.adoc[tags=purpose]
+include::ddwm-enable.adoc[tags=body]
+
+== exec-and-forget
+----
+include::ddwm-exec-and-forget.adoc[tags=synopsis]
+----
+include::ddwm-exec-and-forget.adoc[tags=purpose]
+include::ddwm-exec-and-forget.adoc[tags=body]
+
+== flatten-workspace-tree
+----
+include::ddwm-flatten-workspace-tree.adoc[tags=synopsis]
+----
+include::ddwm-flatten-workspace-tree.adoc[tags=purpose]
+include::ddwm-flatten-workspace-tree.adoc[tags=body]
+
+== focus
+----
+include::ddwm-focus.adoc[tags=synopsis]
+----
+include::ddwm-focus.adoc[tags=purpose]
+include::ddwm-focus.adoc[tags=body]
+
+== focus-back-and-forth
+----
+
+include::./ddwm-focus-back-and-forth.adoc[tags=synopsis]
+----
+include::./ddwm-focus-back-and-forth.adoc[tags=purpose]
+include::./ddwm-focus-back-and-forth.adoc[tags=body]
+
+== focus-monitor
+----
+include::ddwm-focus-monitor.adoc[tags=synopsis]
+----
+include::ddwm-focus-monitor.adoc[tags=purpose]
+include::ddwm-focus-monitor.adoc[tags=body]
+
+== fullscreen
+----
+include::ddwm-fullscreen.adoc[tags=synopsis]
+----
+include::ddwm-fullscreen.adoc[tags=purpose]
+include::ddwm-fullscreen.adoc[tags=body]
+
+== join-with
+----
+include::ddwm-join-with.adoc[tags=synopsis]
+----
+include::ddwm-join-with.adoc[tags=purpose]
+include::ddwm-join-with.adoc[tags=body]
+
+== layout
+----
+include::ddwm-layout.adoc[tags=synopsis]
+----
+include::ddwm-layout.adoc[tags=purpose]
+include::ddwm-layout.adoc[tags=body]
+
+== macos-native-fullscreen
+----
+include::ddwm-macos-native-fullscreen.adoc[tags=synopsis]
+----
+include::ddwm-macos-native-fullscreen.adoc[tags=purpose]
+include::ddwm-macos-native-fullscreen.adoc[tags=body]
+
+== macos-native-minimize
+----
+include::ddwm-macos-native-minimize.adoc[tags=synopsis]
+----
+include::ddwm-macos-native-minimize.adoc[tags=purpose]
+include::ddwm-macos-native-minimize.adoc[tags=body]
+
+== mode
+----
+include::ddwm-mode.adoc[tags=synopsis]
+----
+include::ddwm-mode.adoc[tags=purpose]
+include::ddwm-mode.adoc[tags=body]
+
+[#move]
+== move
+----
+include::ddwm-move.adoc[tags=synopsis]
+----
+include::ddwm-move.adoc[tags=purpose]
+include::ddwm-move.adoc[tags=body]
+
+== move-mouse
+----
+include::./ddwm-move-mouse.adoc[tags=synopsis]
+----
+include::./ddwm-move-mouse.adoc[tags=purpose]
+include::./ddwm-move-mouse.adoc[tags=body]
+
+== move-node-to-monitor
+----
+include::ddwm-move-node-to-monitor.adoc[tags=synopsis]
+----
+include::ddwm-move-node-to-monitor.adoc[tags=purpose]
+include::ddwm-move-node-to-monitor.adoc[tags=body]
+
+== move-node-to-workspace
+----
+include::ddwm-move-node-to-workspace.adoc[tags=synopsis]
+----
+include::ddwm-move-node-to-workspace.adoc[tags=purpose]
+include::ddwm-move-node-to-workspace.adoc[tags=body]
+
+== move-workspace-to-monitor
+----
+include::ddwm-move-workspace-to-monitor.adoc[tags=synopsis]
+----
+include::ddwm-move-workspace-to-monitor.adoc[tags=purpose]
+include::ddwm-move-workspace-to-monitor.adoc[tags=body]
+
+== reload-config
+----
+include::ddwm-reload-config.adoc[tags=synopsis]
+----
+include::ddwm-reload-config.adoc[tags=purpose]
+include::ddwm-reload-config.adoc[tags=body]
+
+== resize
+----
+include::ddwm-resize.adoc[tags=synopsis]
+----
+include::ddwm-resize.adoc[tags=purpose]
+include::ddwm-resize.adoc[tags=body]
+
+== split
+----
+include::ddwm-split.adoc[tags=synopsis]
+----
+include::ddwm-split.adoc[tags=purpose]
+include::ddwm-split.adoc[tags=body]
+
+== swap
+----
+include::ddwm-swap.adoc[tags=synopsis]
+----
+include::ddwm-swap.adoc[tags=purpose]
+include::ddwm-swap.adoc[tags=body]
+
+== summon-workspace
+----
+include::./ddwm-summon-workspace.adoc[tags=synopsis]
+----
+include::./ddwm-summon-workspace.adoc[tags=purpose]
+include::./ddwm-summon-workspace.adoc[tags=body]
+
+== trigger-binding
+----
+include::ddwm-trigger-binding.adoc[tags=synopsis]
+----
+include::ddwm-trigger-binding.adoc[tags=purpose]
+include::ddwm-trigger-binding.adoc[tags=body]
+
+== volume
+----
+include::./ddwm-volume.adoc[tags=synopsis]
+----
+include::./ddwm-volume.adoc[tags=purpose]
+include::./ddwm-volume.adoc[tags=body]
+
+== workspace
+----
+include::ddwm-workspace.adoc[tags=synopsis]
+----
+include::ddwm-workspace.adoc[tags=purpose]
+include::ddwm-workspace.adoc[tags=body]
+
+== workspace-back-and-forth
+----
+include::ddwm-workspace-back-and-forth.adoc[tags=synopsis]
+----
+include::ddwm-workspace-back-and-forth.adoc[tags=purpose]
+include::ddwm-workspace-back-and-forth.adoc[tags=body]
+
+== Query commands
+
+Query commands are commands that do not change the state but rather allow the examination of the current state.
+
+- Query commands are *NOT* available in config +
+(because there is no way to consume the stdout of these commands in config)
+- Query commands are only available in CLI
+
+=== config
+----
+include::ddwm-config.adoc[tags=synopsis]
+----
+include::ddwm-config.adoc[tags=purpose]
+include::ddwm-config.adoc[tags=body]
+
+=== debug-windows
+----
+include::ddwm-debug-windows.adoc[tags=synopsis]
+----
+include::ddwm-debug-windows.adoc[tags=purpose]
+include::ddwm-debug-windows.adoc[tags=body]
+
+=== list-apps
+----
+include::ddwm-list-apps.adoc[tags=synopsis]
+----
+include::ddwm-list-apps.adoc[tags=purpose]
+include::ddwm-list-apps.adoc[tags=body]
+
+=== list-exec-env-vars
+----
+include::ddwm-list-exec-env-vars.adoc[tags=synopsis]
+----
+include::ddwm-list-exec-env-vars.adoc[tags=purpose]
+include::ddwm-list-exec-env-vars.adoc[tags=body]
+
+=== list-modes
+----
+include::ddwm-list-modes.adoc[tags=synopsis]
+----
+include::ddwm-list-modes.adoc[tags=purpose]
+include::ddwm-list-modes.adoc[tags=body]
+
+=== list-monitors
+----
+include::ddwm-list-monitors.adoc[tags=synopsis]
+----
+include::ddwm-list-monitors.adoc[tags=purpose]
+include::ddwm-list-monitors.adoc[tags=body]
+
+=== list-windows
+----
+include::ddwm-list-windows.adoc[tags=synopsis]
+----
+include::ddwm-list-windows.adoc[tags=purpose]
+include::ddwm-list-windows.adoc[tags=body]
+
+=== list-workspaces
+----
+include::ddwm-list-workspaces.adoc[tags=synopsis]
+----
+include::ddwm-list-workspaces.adoc[tags=purpose]
+include::ddwm-list-workspaces.adoc[tags=body]

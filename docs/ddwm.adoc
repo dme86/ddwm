@@ -1,0 +1,24 @@
+= ddwm(1)
+include::util/man-attributes.adoc[]
+:manname: ddwm
+:manpurpose: i3-like tiling window manager for macOS
+
+== Synopsis
+[verse]
+ddwm [-h|--help] [-v|--version] <subcommand> [<subcommand-options>...] [<subcommand-arguments>...]
+
+== Description
+
+ddwm is an i3-like tiling window manager for macOS
+
+*ddwm* command line program is used to manipulate ddwm and query its state.
+
+See https://dme86.github.io/ddwm/commands for available <subcommand> options
+
+See each <subcommand> individual man page for <subcommand-options> and <subcommand-arguments>
+
+== Options
+
+-h, --help:: Print help
+
+include::util/man-footer.adoc[]

@@ -1,0 +1,71 @@
+{
+  "AXActivationPoint" : "<AXValue 0x600002fcb030> {value = x:-1.000000 y:1170.000000 type = kAXValueCGPointType}",
+  "AXCancelButton" : null,
+  "AXCloseButton" : null,
+  "AXDefaultButton" : null,
+  "AXDocument" : null,
+  "AXFocused" : 0,
+  "AXFrame" : "<AXValue 0x600003402880> {value = x:525.000000 y:188.000000 w:750.000000 h:474.000000 type = kAXValueCGRectType}",
+  "AXFullScreen" : 0,
+  "AXFullScreenButton" : null,
+  "AXGrowArea" : null,
+  "AXMain" : 1,
+  "AXMinimizeButton" : null,
+  "AXMinimized" : 0,
+  "AXModal" : 0,
+  "AXParent" : "<AXUIElement Application 0x600002fc8c00> {pid=76823}",
+  "AXPosition" : "<AXValue 0x600002fc9170> {value = x:525.000000 y:188.000000 type = kAXValueCGPointType}",
+  "AXProxy" : null,
+  "AXRole" : "AXWindow",
+  "AXSections" : [
+    "{\n    SectionDescription = Content;\n    SectionObject = \"<AXUIElement 0x600002fc8a80> {pid=76823}\";\n    SectionUniqueID = AXContent;\n}"
+  ],
+  "AXSize" : "<AXValue 0x600002fc8c00> {value = w:750.000000 h:474.000000 type = kAXValueCGSizeType}",
+  "AXSubrole" : "AXSystemDialog",
+  "AXTitle" : "",
+  "AXTitleUIElement" : null,
+  "AXToolbarButton" : null,
+  "AXZoomButton" : null,
+  "Ddwm.AXApp" : {
+    "AXExtrasMenuBar" : null,
+    "AXFocusedUIElement" : "AXUIElement(AxWindowId=26499, title=nil, role=\"AXTextField\", subrole=\"raycast_searchField\")",
+    "AXFocusedWindow" : "AXUIElement(AxWindowId=26499, title=\"\", role=\"AXWindow\", subrole=\"AXSystemDialog\")",
+    "AXFrame" : null,
+    "AXFrontmost" : 1,
+    "AXFunctionRowTopLevelElements" : [
+
+    ],
+    "AXMainWindow" : "AXUIElement(AxWindowId=26499, title=\"\", role=\"AXWindow\", subrole=\"AXSystemDialog\")",
+    "AXMenuBar" : "<AXUIElement 0x600002fca730> {pid=76823}",
+    "AXPosition" : null,
+    "AXRole" : "AXApplication",
+    "AXSize" : null,
+    "AXTitle" : "Raycast",
+    "AXWindows" : [
+      "AXUIElement(AxWindowId=26499, title=\"\", role=\"AXWindow\", subrole=\"AXSystemDialog\")"
+    ],
+    "Ddwm.AxFailed" : "isWritable.AXFunctionRowTopLevelElements, get.AXFrame, isWritable.AXFrame, get.AXExtrasMenuBar, isWritable.AXExtrasMenuBar, get.AXSize, isWritable.AXSize, get.AXPosition, isWritable.AXPosition",
+    "Ddwm.AxIgnored" : "AXChildren, AXChildrenInNavigationOrder, AXEnhancedUserInterface, AXPreferredLanguage, AXRoleDescription, AXHidden",
+    "Ddwm.AxWritable" : "AXFrontmost"
+  },
+  "Ddwm.App.appBundleId" : "com.raycast.macos",
+  "Ddwm.App.nsApp.activationPolicy" : "accessory",
+  "Ddwm.App.nsApp.appBundlePath" : "file:///Applications/Raycast.app/",
+  "Ddwm.App.nsApp.execPath" : "file:///Applications/Raycast.app/Contents/MacOS/Raycast",
+  "Ddwm.App.pid" : 76823,
+  "Ddwm.App.version" : "0",
+  "Ddwm.App.versionShort" : "1.103.7",
+  "Ddwm.AxFailed" : "isWritable.AXFrame, get.AXGrowArea, get.AXMinimizeButton, get.AXDocument, get.AXCloseButton, isWritable.AXActivationPoint, get.AXFullScreenButton, get.AXProxy, get.AXDefaultButton, get.AXTitleUIElement, get.AXCancelButton, get.AXZoomButton, get.AXToolbarButton",
+  "Ddwm.AxIgnored" : "AXChildrenInNavigationOrder, AXChildren, AXRoleDescription",
+  "Ddwm.AxUiElementWindowType" : "popup",
+  "Ddwm.AxUiElementWindowType_isDialogHeuristic" : true,
+  "Ddwm.AxWritable" : "AXPosition, AXSections, AXMain",
+  "Ddwm.axWindowId" : 26499,
+  "Ddwm.macOS.version" : "Version 15.7.1 (Build 24G231)",
+  "Ddwm.on-window-detected" : [
+
+  ],
+  "Ddwm.treeNodeParent" : "Optional(AppBundle.MacosPopupWindowsContainer)",
+  "Ddwm.windowLevel" : 8,
+  "Ddwm.workspace" : null
+}

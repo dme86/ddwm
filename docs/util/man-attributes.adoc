@@ -1,0 +1,5 @@
+ifndef::env-site[]
+:doctype: manpage
+:manmanual: ddwm Manual
+:mansource: ddwm
+endif::[]

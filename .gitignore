@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Xcode / Swift tooling
+DerivedData/
+.xcode-build/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+xcuserdata/
+xcshareddata/
+*.playground/xcuserdata/
+
+# Project build/debug output
+.debug/
+.release/
+.shell-completion/
+.site/
+.man/
+default.profraw
+
+# Local dependency/tool bootstrap
+.deps/
+.cache/
+
+# Local developer-only workspace
+.local/
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs / runtime artifacts
+*.log
+
+# Ruby bundler lockfile (repo uses Gemfile; lockfile is local-only here)
+Gemfile.lock

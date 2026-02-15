@@ -1,0 +1,153 @@
+# Place a copy of this config to ~/.ddwm.toml
+# After that, you can edit ~/.ddwm.toml to your liking
+
+# Config version for compatibility and deprecations
+# Fallback value (if you omit the key): config-version = 1
+config-version = 2
+
+# You can use it to add commands that run after ddwm startup.
+# Available commands : https://dme86.github.io/ddwm/commands
+after-startup-command = []
+
+# Start ddwm at login
+start-at-login = false
+
+# Automatically reload the config when the config file is saved
+# After setting this to true, reload once manually to start the auto-reloading
+auto-reload-config = false
+
+# Normalizations. See: https://dme86.github.io/ddwm/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# See: https://dme86.github.io/ddwm/guide#layouts
+# Legacy option kept for backward compatibility
+accordion-padding = 30
+
+# Possible values: tile|monocle|tiles|accordion
+# 'tiles' and 'accordion' are legacy aliases and map to 'tile'
+default-root-container-layout = 'tile'
+
+# Possible values: horizontal|vertical|auto
+# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
+#               tall monitor (anything higher than wide) gets vertical orientation
+default-root-container-orientation = 'auto'
+
+# Mouse follows focus when focused monitor changes
+# Drop it from your config, if you don't like this behavior
+# See https://dme86.github.io/ddwm/guide#on-focus-changed-callbacks
+# See https://dme86.github.io/ddwm/commands#move-mouse
+# Fallback value (if you omit the key): on-focused-monitor-changed = []
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
+# Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
+# Also see: https://dme86.github.io/ddwm/goodies#disable-hide-app
+automatically-unhide-macos-hidden-apps = false
+
+# List of workspaces that should stay alive even when they contain no windows,
+# even when they are invisible.
+# This config version is only available since 'config-version = 2'
+# Fallback value (if you omit the key): persistent-workspaces = []
+persistent-workspaces = ["1", "2", "3", "4"]
+
+# Possible values: (qwerty|dvorak|colemak)
+# See https://dme86.github.io/ddwm/guide#key-mapping
+[key-mapping]
+    preset = 'qwerty'
+
+# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# Possible values:
+# - Constant:     gaps.outer.top = 8
+# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
+#                 In this example, 24 is a default value when there is no match.
+#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
+#                 See:
+#                 https://dme86.github.io/ddwm/guide#assign-workspaces-to-monitors
+[gaps]
+    inner.horizontal = 0
+    inner.vertical =   0
+    outer.left =       0
+    outer.bottom =     0
+    outer.top =        0
+    outer.right =      0
+
+# Main bindings
+# ddwm always reads bindings from mode.main.binding
+# Fallback value (if you omit the key): mode.main.binding = {}
+[mode.main.binding]
+
+    # All possible keys:
+    # - Letters.        a, b, c, ..., z
+    # - Numbers.        0, 1, 2, ..., 9
+    # - Keypad numbers. keypad0, keypad1, keypad2, ..., keypad9
+    # - F-keys.         f1, f2, ..., f20
+    # - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon,
+    #                   backtick, leftSquareBracket, rightSquareBracket, space, enter, esc,
+    #                   backspace, tab, pageUp, pageDown, home, end, forwardDelete,
+    #                   sectionSign (ISO keyboards only, european keyboards only)
+    # - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
+    #                   keypadMinus, keypadMultiply, keypadPlus
+    # - Arrows.         left, down, up, right
+
+    # All possible modifiers: cmd, alt, ctrl, shift
+
+    # All possible commands: https://dme86.github.io/ddwm/commands
+
+    # See: https://dme86.github.io/ddwm/commands#exec-and-forget
+    # You can uncomment the following lines to open up terminal with alt + enter shortcut
+    # alt-enter = '''exec-and-forget osascript -e '
+    # tell application "Terminal"
+    #     do script
+    #     activate
+    # end tell'
+    # '''
+    cmd-shift-enter = 'exec-and-forget open -na Alacritty'
+
+    # See: https://dme86.github.io/ddwm/commands#layout
+    # Toggle dynamic tiling layout between tile (main+stack) and monocle
+    cmd-shift-m = 'layout tile monocle'
+    alt-shift-m = 'layout tile monocle'
+    alt-comma = 'layout floating tiling'
+
+    # See: https://dme86.github.io/ddwm/commands#focus
+    alt-j = 'focus dfs-next'
+    alt-k = 'focus dfs-prev'
+    alt-h = 'focus left'
+    alt-l = 'focus right'
+    cmd-shift-j = 'focus dfs-next'
+    cmd-shift-k = 'focus dfs-prev'
+
+    # See: https://dme86.github.io/ddwm/commands#focus
+    # Focus next/prev with shifted alternative
+    alt-shift-j = 'focus dfs-next'
+    alt-shift-k = 'focus dfs-prev'
+    # alt-enter only: swap focused window with main
+    alt-enter = 'swap master'
+
+    # See: https://dme86.github.io/ddwm/commands#resize
+    # adjust main ratio by 5%
+    alt-minus = 'resize smart -5'
+    alt-equal = 'resize smart +5'
+    cmd-shift-c = 'close'
+
+    # See: https://dme86.github.io/ddwm/commands#workspace
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-keypad1 = 'workspace 1'
+    alt-keypad2 = 'workspace 2'
+    alt-keypad3 = 'workspace 3'
+    alt-keypad4 = 'workspace 4'
+
+    # See: https://dme86.github.io/ddwm/commands#move-node-to-workspace
+    alt-shift-1 = 'move-node-to-workspace 1'
+    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-3 = 'move-node-to-workspace 3'
+    alt-shift-4 = 'move-node-to-workspace 4'
+
+    # See: https://dme86.github.io/ddwm/commands#workspace-back-and-forth
+    alt-tab = 'workspace-back-and-forth'
+    # See: https://dme86.github.io/ddwm/commands#move-workspace-to-monitor
+    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'

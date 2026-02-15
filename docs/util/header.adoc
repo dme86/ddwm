@@ -1,0 +1,11 @@
+====
+ddwm is an i3-like tiling window manager for macOS
+
+*Project homepage*: https://github.com/dme86/ddwm
+
+image:assets/icon.png[300,300,float="right"]
+
+* xref:guide.adoc[ddwm Guide]
+* xref:commands.adoc[ddwm Commands]
+* xref:goodies.adoc[ddwm Goodies]
+====

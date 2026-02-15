@@ -1,0 +1,2 @@
+public let DDWM_WINDOW_ID = "DDWM_WINDOW_ID"
+public let DDWM_WORKSPACE = "DDWM_WORKSPACE"

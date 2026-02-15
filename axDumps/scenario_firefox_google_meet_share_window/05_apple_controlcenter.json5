@@ -1,0 +1,36 @@
+{
+  "Ddwm.AXApp" : {
+    "AXExtrasMenuBar" : "<AXUIElement 0x600003383ed0> {pid=562}",
+    "AXFocusedUIElement" : "AXUIElement(AxWindowId=385, title=nil, role=\"AXGroup\", subrole=\"AXHostingView\")",
+    "AXFocusedWindow" : "AXUIElement(AxWindowId=385, title=nil, role=\"AXWindow\", subrole=\"AXSystemDialog\")",
+    "AXFrame" : null,
+    "AXFrontmost" : 1,
+    "AXFunctionRowTopLevelElements" : [
+
+    ],
+    "AXMainWindow" : null,
+    "AXMenuBar" : null,
+    "AXPosition" : null,
+    "AXRole" : "AXApplication",
+    "AXSize" : null,
+    "AXTitle" : "Control Centre",
+    "AXWindows" : [
+
+    ],
+    "Ddwm.AxIgnored" : "AXChildren, AXChildrenInNavigationOrder, AXEnhancedUserInterface, AXPreferredLanguage, AXRoleDescription, AXHidden"
+  },
+  "Ddwm.App.appBundleId" : "com.apple.controlcenter",
+  "Ddwm.App.nsApp.activationPolicy" : "accessory",
+  "Ddwm.App.nsApp.execPath" : "file:///System/Library/CoreServices/ControlCenter.app/Contents/MacOS/ControlCenter",
+  "Ddwm.App.version" : "1",
+  "Ddwm.App.versionShort" : "1.0",
+  "Ddwm.AxUiElementWindowType" : "popup",
+  "Ddwm.AxUiElementWindowType_isDialogHeuristic" : true,
+  "Ddwm.axWindowId" : 15,
+  "Ddwm.macOS.version" : "Version 15.5 (Build 24F74)",
+  "Ddwm.on-window-detected" : [
+
+  ],
+  "Ddwm.treeNodeParent" : "Optional(AppBundle.TilingContainer)",
+  "Ddwm.workspace" : "F"
+}

@@ -1,0 +1,271 @@
+import AppKit
+
+extension Workspace {
+    @MainActor
+    func layoutWorkspace() async throws {
+        if isEffectivelyEmpty { return }
+        let rect = workspaceMonitor.visibleRectPaddedByOuterGaps
+        try await layoutDwmWorkspace(
+            rect: Rect(topLeftX: rect.topLeftX, topLeftY: rect.topLeftY, width: rect.width, height: rect.height - 1),
+            context: LayoutContext(self),
+        )
+    }
+}
+
+extension Workspace {
+    @MainActor
+    private func layoutDwmWorkspace(rect: Rect, context: LayoutContext) async throws {
+        lastAppliedLayoutPhysicalRect = rect
+        lastAppliedLayoutVirtualRect = rect
+        rootTilingContainer.lastAppliedLayoutPhysicalRect = rect
+        rootTilingContainer.lastAppliedLayoutVirtualRect = rect
+
+        let clients = tilingClients
+        guard !clients.isEmpty else { return }
+
+        switch rootTilingContainer.layout {
+            case .monocle:
+                for window in clients {
+                    try await applyFrame(window: window, rect: rect, virtual: rect, context: context)
+                }
+            case .tile, .tiles, .accordion:
+                try await layoutTile(clients: clients, rect: rect, context: context)
+        }
+
+        for window in floatingWindows {
+            window.lastAppliedLayoutPhysicalRect = nil
+            window.lastAppliedLayoutVirtualRect = nil
+            try await window.layoutFloatingWindow(context)
+        }
+    }
+
+    @MainActor
+    private func layoutTile(clients: [Window], rect: Rect, context: LayoutContext) async throws {
+        let count = clients.count
+        let masters = max(1, min(masterCount, count))
+        let stackCount = count - masters
+
+        let mfact = min(max(masterFactor, 0.05), 0.95)
+        let masterWidth = stackCount == 0 ? rect.width : floor(rect.width * mfact)
+        let stackWidth = rect.width - masterWidth
+
+        let innerHGap = CGFloat(context.resolvedGaps.inner.horizontal)
+        let innerVGap = CGFloat(context.resolvedGaps.inner.vertical)
+
+        let masterRects = splitVertically(
+            count: masters,
+            x: rect.topLeftX,
+            y: rect.topLeftY,
+            width: masterWidth,
+            height: rect.height,
+            innerGap: innerVGap,
+        )
+        for (i, frame) in masterRects.enumerated() {
+            try await applyFrame(window: clients[i], rect: frame, virtual: frame, context: context)
+        }
+
+        guard stackCount > 0 else { return }
+        let stackX = rect.topLeftX + masterWidth + innerHGap
+        let stackRects = splitVertically(
+            count: stackCount,
+            x: stackX,
+            y: rect.topLeftY,
+            width: max(0, stackWidth - innerHGap),
+            height: rect.height,
+            innerGap: innerVGap,
+        )
+        for (offset, frame) in stackRects.enumerated() {
+            try await applyFrame(window: clients[masters + offset], rect: frame, virtual: frame, context: context)
+        }
+    }
+}
+
+@MainActor
+private func applyFrame(window: Window, rect: Rect, virtual: Rect, context: LayoutContext) async throws {
+    guard window.windowId != currentlyManipulatedWithMouseWindowId else { return }
+    window.lastAppliedLayoutVirtualRect = virtual
+    if window.isFullscreen && window == context.workspace.rootTilingContainer.mostRecentWindowRecursive {
+        window.lastAppliedLayoutPhysicalRect = nil
+        window.layoutFullscreen(context)
+    } else {
+        window.lastAppliedLayoutPhysicalRect = rect
+        window.isFullscreen = false
+        window.setAxFrame(rect.topLeftCorner, CGSize(width: rect.width, height: rect.height))
+    }
+}
+
+private func splitVertically(
+    count: Int,
+    x: CGFloat,
+    y: CGFloat,
+    width: CGFloat,
+    height: CGFloat,
+    innerGap: CGFloat,
+) -> [Rect] {
+    guard count > 0 else { return [] }
+    let gapsTotal = innerGap * CGFloat(max(0, count - 1))
+    let each = max(0, floor((height - gapsTotal) / CGFloat(count)))
+    var currentY = y
+    var result: [Rect] = []
+    for i in 0 ..< count {
+        let isLast = i == count - 1
+        let h = isLast ? max(0, y + height - currentY) : each
+        result.append(Rect(topLeftX: x, topLeftY: currentY, width: max(0, width), height: h))
+        currentY += h + innerGap
+    }
+    return result
+}
+
+extension TreeNode {
+    @MainActor
+    fileprivate func layoutRecursive(_ point: CGPoint, width: CGFloat, height: CGFloat, virtual: Rect, _ context: LayoutContext) async throws {
+        let physicalRect = Rect(topLeftX: point.x, topLeftY: point.y, width: width, height: height)
+        switch nodeCases {
+            case .workspace(let workspace):
+                lastAppliedLayoutPhysicalRect = physicalRect
+                lastAppliedLayoutVirtualRect = virtual
+                try await workspace.rootTilingContainer.layoutRecursive(point, width: width, height: height, virtual: virtual, context)
+                for window in workspace.children.filterIsInstance(of: Window.self) {
+                    window.lastAppliedLayoutPhysicalRect = nil
+                    window.lastAppliedLayoutVirtualRect = nil
+                    try await window.layoutFloatingWindow(context)
+                }
+            case .window(let window):
+                if window.windowId != currentlyManipulatedWithMouseWindowId {
+                    lastAppliedLayoutVirtualRect = virtual
+                    if window.isFullscreen && window == context.workspace.rootTilingContainer.mostRecentWindowRecursive {
+                        lastAppliedLayoutPhysicalRect = nil
+                        window.layoutFullscreen(context)
+                    } else {
+                        lastAppliedLayoutPhysicalRect = physicalRect
+                        window.isFullscreen = false
+                        window.setAxFrame(point, CGSize(width: width, height: height))
+                    }
+                }
+            case .tilingContainer(let container):
+                lastAppliedLayoutPhysicalRect = physicalRect
+                lastAppliedLayoutVirtualRect = virtual
+                switch container.layout {
+                    case .tile, .tiles:
+                        try await container.layoutTiles(point, width: width, height: height, virtual: virtual, context)
+                    case .accordion, .monocle:
+                        try await container.layoutAccordion(point, width: width, height: height, virtual: virtual, context)
+                }
+            case .macosMinimizedWindowsContainer, .macosFullscreenWindowsContainer,
+                 .macosPopupWindowsContainer, .macosHiddenAppsWindowsContainer:
+                return // Nothing to do for weirdos
+        }
+    }
+}
+
+private struct LayoutContext {
+    let workspace: Workspace
+    let resolvedGaps: ResolvedGaps
+
+    @MainActor
+    init(_ workspace: Workspace) {
+        self.workspace = workspace
+        self.resolvedGaps = ResolvedGaps(gaps: config.gaps, monitor: workspace.workspaceMonitor)
+    }
+}
+
+extension Window {
+    @MainActor
+    fileprivate func layoutFloatingWindow(_ context: LayoutContext) async throws {
+        let workspace = context.workspace
+        let currentMonitor = try await getCenter()?.monitorApproximation // Probably not idempotent
+        if let currentMonitor, let windowTopLeftCorner = try await getAxTopLeftCorner(), workspace != currentMonitor.activeWorkspace {
+            let xProportion = (windowTopLeftCorner.x - currentMonitor.visibleRect.topLeftX) / currentMonitor.visibleRect.width
+            let yProportion = (windowTopLeftCorner.y - currentMonitor.visibleRect.topLeftY) / currentMonitor.visibleRect.height
+
+            let moveTo = workspace.workspaceMonitor
+            setAxFrame(CGPoint(
+                x: moveTo.visibleRect.topLeftX + xProportion * moveTo.visibleRect.width,
+                y: moveTo.visibleRect.topLeftY + yProportion * moveTo.visibleRect.height,
+            ), nil)
+        }
+        if isFullscreen {
+            layoutFullscreen(context)
+            isFullscreen = false
+        }
+    }
+
+    @MainActor
+    fileprivate func layoutFullscreen(_ context: LayoutContext) {
+        let monitorRect = noOuterGapsInFullscreen
+            ? context.workspace.workspaceMonitor.visibleRect
+            : context.workspace.workspaceMonitor.visibleRectPaddedByOuterGaps
+        setAxFrame(monitorRect.topLeftCorner, CGSize(width: monitorRect.width, height: monitorRect.height))
+    }
+}
+
+extension TilingContainer {
+    @MainActor
+    fileprivate func layoutTiles(_ point: CGPoint, width: CGFloat, height: CGFloat, virtual: Rect, _ context: LayoutContext) async throws {
+        var point = point
+        var virtualPoint = virtual.topLeftCorner
+
+        guard let delta = ((orientation == .h ? width : height) - CGFloat(children.sumOfDouble { $0.getWeight(orientation) }))
+            .div(children.count) else { return }
+
+        let lastIndex = children.indices.last
+        for (i, child) in children.enumerated() {
+            child.setWeight(orientation, child.getWeight(orientation) + delta)
+            let rawGap = context.resolvedGaps.inner.get(orientation).toDouble()
+            // Gaps. Consider 4 cases:
+            // 1. Multiple children. Layout first child
+            // 2. Multiple children. Layout last child
+            // 3. Multiple children. Layout child in the middle
+            // 4. Single child   let rawGap = gaps.inner.get(orientation).toDouble()
+            let gap = rawGap - (i == 0 ? rawGap / 2 : 0) - (i == lastIndex ? rawGap / 2 : 0)
+            try await child.layoutRecursive(
+                i == 0 ? point : point.addingOffset(orientation, rawGap / 2),
+                width: orientation == .h ? child.hWeight - gap : width,
+                height: orientation == .v ? child.vWeight - gap : height,
+                virtual: Rect(
+                    topLeftX: virtualPoint.x,
+                    topLeftY: virtualPoint.y,
+                    width: orientation == .h ? child.hWeight : width,
+                    height: orientation == .v ? child.vWeight : height,
+                ),
+                context,
+            )
+            virtualPoint = orientation == .h ? virtualPoint.addingXOffset(child.hWeight) : virtualPoint.addingYOffset(child.vWeight)
+            point = orientation == .h ? point.addingXOffset(child.hWeight) : point.addingYOffset(child.vWeight)
+        }
+    }
+
+    @MainActor
+    fileprivate func layoutAccordion(_ point: CGPoint, width: CGFloat, height: CGFloat, virtual: Rect, _ context: LayoutContext) async throws {
+        guard let mruIndex: Int = mostRecentChild?.ownIndex else { return }
+        for (index, child) in children.enumerated() {
+            let padding = CGFloat(config.accordionPadding)
+            let (lPadding, rPadding): (CGFloat, CGFloat) = switch index {
+                case 0 where children.count == 1: (0, 0)
+                case 0:                           (0, padding)
+                case children.indices.last:       (padding, 0)
+                case mruIndex - 1:                (0, 2 * padding)
+                case mruIndex + 1:                (2 * padding, 0)
+                default:                          (padding, padding)
+            }
+            switch orientation {
+                case .h:
+                    try await child.layoutRecursive(
+                        point + CGPoint(x: lPadding, y: 0),
+                        width: width - rPadding - lPadding,
+                        height: height,
+                        virtual: virtual,
+                        context,
+                    )
+                case .v:
+                    try await child.layoutRecursive(
+                        point + CGPoint(x: 0, y: lPadding),
+                        width: width,
+                        height: height - lPadding - rPadding,
+                        virtual: virtual,
+                        context,
+                    )
+            }
+        }
+    }
+}

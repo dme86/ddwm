@@ -1,0 +1,20 @@
+== Resources
+
+*Project homepage:* https://github.com/dme86/ddwm +
+*Guide:* https://dme86.github.io/ddwm/guide +
+
+== BUGS
+
+Bugs can be reported to https://github.com/dme86/ddwm/discussions/categories/potential-bugs
+
+Maintainers will move verified bugs to https://github.com/dme86/ddwm/issues
+
+== License
+
+Copyright (C) 2023 ddwm +
+Free use of this software is granted under the terms of the MIT License +
+You can find the full text of ddwm license and its dependencies in the 'legal' directory of the distributed zip archive.
+
+== AUTHOR
+
+ddwm

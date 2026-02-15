@@ -1,0 +1,25 @@
+# dwm-style dynamic bindings for ddwm
+
+config-version = 2
+default-root-container-layout = 'tile'
+default-root-container-orientation = 'horizontal'
+persistent-workspaces = ["1", "2", "3", "4"]
+
+[mode.main.binding]
+    alt-j = 'focus dfs-next'
+    alt-k = 'focus dfs-prev'
+
+    alt-shift-j = 'focus dfs-next'
+    alt-shift-k = 'focus dfs-prev'
+    alt-enter = 'swap master'
+
+    alt-minus = 'resize smart -5'
+    alt-equal = 'resize smart +5'
+
+    cmd-shift-m = 'layout tile monocle'
+    alt-comma = 'layout floating tiling'
+
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
