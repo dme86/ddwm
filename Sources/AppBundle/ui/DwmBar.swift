@@ -91,33 +91,24 @@ final class DwmBarController {
         let normalBg = NSColor(hex: "#222222")
         let selectedFg = NSColor(hex: "#1b1515")
         let selectedBg = NSColor(hex: "#818181")
-        let dimmedFg = normalFg.withAlphaComponent(0.55)
-        let dimmedBg = normalBg.withAlphaComponent(0.45)
+        let dimmedFg = normalFg.withAlphaComponent(0.4)
+        let dimmedBg = normalBg.withAlphaComponent(0.4)
         let font = NSFont(name: "Hack Nerd Font", size: 13)
             ?? NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
 
+        let visibleOrActive = Workspace.all
+            .filter { !$0.isEffectivelyEmpty || $0.isVisible || config.persistentWorkspaces.contains($0.name) }
+        let workspaces = visibleOrActive.isEmpty ? Workspace.all : visibleOrActive
+
         let full = NSMutableAttributedString()
-        let focusedMonitorOrigin = focus.workspace.workspaceMonitor.rect.topLeftCorner
-        for (index, monitor) in sortedMonitors.enumerated() {
-            let isFocusedMonitor = monitor.rect.topLeftCorner == focusedMonitorOrigin
-            let monitorIndex = index + 1
-            let segmentText = " M\(monitorIndex):\(monitor.activeWorkspace.name) "
+        for workspace in workspaces {
+            let isFocused = workspace == focus.workspace
             let attrs: [NSAttributedString.Key: Any] = [
                 .font: font,
-                .foregroundColor: isFocusedMonitor ? selectedFg : dimmedFg,
-                .backgroundColor: isFocusedMonitor ? selectedBg : dimmedBg,
+                .foregroundColor: isFocused ? selectedFg : dimmedFg,
+                .backgroundColor: isFocused ? selectedBg : dimmedBg,
             ]
-            full.append(NSAttributedString(string: segmentText, attributes: attrs))
-            if index != sortedMonitors.indices.last {
-                full.append(NSAttributedString(
-                    string: " ",
-                    attributes: [
-                        .font: font,
-                        .foregroundColor: dimmedFg,
-                        .backgroundColor: normalBg,
-                    ]
-                ))
-            }
+            full.append(NSAttributedString(string: " \(workspace.name) ", attributes: attrs))
         }
         return full
     }
