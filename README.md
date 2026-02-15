@@ -26,17 +26,17 @@ Requirements:
 
 Build debug binaries:
 ```bash
-./build-debug.sh
+make build
 ```
 
 Run app server:
 ```bash
-./run-debug.sh
+make run
 ```
 
 Run CLI:
 ```bash
-./run-cli.sh --help
+make run-cli
 ```
 
 ## Configuration
@@ -115,7 +115,7 @@ alt-keypad4 = 'workspace 4'
 ## Troubleshooting
 
 - `ddwm` CLI cannot connect:
-  - Ensure the app/server is running (`./run-debug.sh` or installed app is open).
+  - Ensure the app/server is running (`make run` or installed app is open).
 - Commands do nothing:
   - Reload config (`ddwm reload-config`) and check for syntax errors.
 - Accessibility issues:

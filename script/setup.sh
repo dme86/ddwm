@@ -24,13 +24,13 @@ if /bin/test -z "${NUKE_PATH:-}"; then
     /bin/rm -rf .deps/bin
     /bin/mkdir -p .deps/bin
 
-    add-optional-dep-to-bin bash not-outdated-bash # build-shell-completion.sh
-    add-optional-dep-to-bin fish # build-shell-completion.sh
-    add-optional-dep-to-bin rustc # build-shell-completion.sh
-    add-optional-dep-to-bin cargo # build-shell-completion.sh
-    add-optional-dep-to-bin bundle # build-docs.sh
-    add-optional-dep-to-bin bundler # build-docs.sh
-    add-optional-dep-to-bin xcbeautify # build-release.sh
+    add-optional-dep-to-bin bash not-outdated-bash # ./script/dev.sh build-shell-completion
+    add-optional-dep-to-bin fish # ./script/dev.sh build-shell-completion
+    add-optional-dep-to-bin rustc # ./script/dev.sh build-shell-completion
+    add-optional-dep-to-bin cargo # ./script/dev.sh build-shell-completion
+    add-optional-dep-to-bin bundle # ./script/dev.sh build-docs
+    add-optional-dep-to-bin bundler # ./script/dev.sh build-docs
+    add-optional-dep-to-bin xcbeautify # ./script/dev.sh build-release
     add-optional-dep-to-bin git
     add-optional-dep-to-bin swift
     add-optional-dep-to-bin swiftly

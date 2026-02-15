@@ -22,8 +22,8 @@ if ! test -d "$site_git_repo_path"; then
     exit 1
 fi
 
-./run-tests.sh
-./build-release.sh --build-version "$build_version"
+./script/dev.sh run-tests
+./script/dev.sh build-release --build-version "$build_version"
 
 git tag -a "v$build_version" -m "v$build_version" && git push git@github.com:dme86/ddwm.git "v$build_version"
 link="https://github.com/dme86/ddwm/releases/new?tag=v$build_version"

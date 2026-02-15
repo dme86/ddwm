@@ -1,5 +1,5 @@
 # EBNF-like grammar of ddwm CLI args to generate shell completion. Managed by https://github.com/adaszko/complgen
-# Run ./build-shell-completion.sh to generate shell completion
+# Run ./script/dev.sh build-shell-completion to generate shell completion
 ddwm <subcommand>;
 ddwm -v;
 ddwm --version;

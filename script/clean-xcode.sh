@@ -8,4 +8,4 @@ rm -rf ~/Library/Developer/Xcode/DerivedData/ddwm-*
 rm -rf ./.xcode-build
 
 rm -rf ddwm.xcodeproj
-./generate.sh
+./script/dev.sh generate

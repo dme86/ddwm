@@ -1,5 +1,5 @@
 // FILE IS GENERATED FROM docs/ddwm-*.adoc files
-// TO REGENERATE THE FILE RUN generate.sh
+// TO REGENERATE THE FILE RUN ./script/dev.sh generate
 
 let balance_sizes_help_generated = """
     USAGE: balance-sizes [-h|--help] [--workspace <workspace>]

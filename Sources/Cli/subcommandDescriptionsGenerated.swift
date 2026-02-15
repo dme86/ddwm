@@ -1,5 +1,5 @@
 // FILE IS GENERATED FROM docs/ddwm-*.adoc files
-// TO REGENERATE THE FILE RUN generate.sh
+// TO REGENERATE THE FILE RUN ./script/dev.sh generate
 
 let subcommandDescriptions = [
     ["  balance-sizes", "Balance sizes of all windows in the current workspace"],

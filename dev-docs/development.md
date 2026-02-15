@@ -37,23 +37,23 @@ If you only plan to build the debug version of ddwm, you can run it from the ter
     -   Identity Type: `Self-Signed Root`
     -   Certificate Type: `Code Signing`
 
-## 3. Entry point scripts
+## 3. Entry points
 
 **Debug build**
--   `build-debug.sh` - Build debug build to `.debug` dir by using SPM. (Xcode is not involved)
--   `run-tests.sh` - Run tests.
--   `swiftformat.sh` - Format the code.
--   `run-debug.sh` - Run ddwm.app debug build.
--   `run-cli.sh` - Run `ddwm` in CLI. Arguments are forwarded to `ddwm` binary.
--   `build-docs.sh` - Build the site and man pages to `.site` and `.man` dirs respectively.
--   `build-shell-completion.sh` - Build shell completion to `.shell-completion`.
+-   `make build` - Build debug build to `.debug` dir by using SPM. (Xcode is not involved)
+-   `make test` - Run tests.
+-   `make format` - Format the code.
+-   `make run` - Run ddwm.app debug build.
+-   `make run-cli` - Run `ddwm` in CLI. Arguments are forwarded to `ddwm` binary.
+-   `make docs` - Build the site and man pages to `.site` and `.man` dirs respectively.
+-   `make completion` - Build shell completion to `.shell-completion`.
     You can test that the completion works properly by sourcing the file `source ./.shell-completion/zsh/_ddwm`
--   `generate.sh` - Regenerate generated project files. `ddwm.xcodeproj` is generated, and some of the source files
+-   `make generate` - Regenerate generated project files. `ddwm.xcodeproj` is generated, and some of the source files
     (the source files have `Generated` suffix in their names).
 
 **Release build**
--   `build-release.sh` - Build release build to `.release` dir by using Xcode.
--   `install-from-sources.sh` - Build release build from sources and install artifacts to `~/.local/ddwm`.
+-   `make release` - Build release build to `.release` dir by using Xcode.
+-   `make install` - Build release build from sources and install artifacts to `~/.local/ddwm`.
 
 ## IDE
 
@@ -71,7 +71,7 @@ Even if you use LSP and another text editor, Xcode is still useful to attach deb
 
 1.  To open the project in Xcode: File -> Open -> Choose `Package.swift` file instead of `ddwm.xcodeproj`.
     It's better to open `Package.swift`, because SPM project is more lightweight.
-    `ddwm.xcodeproj` is only used in `*release*.sh` build scripts.
+    `ddwm.xcodeproj` is only used in release build scripts.
 2.  After you opened the project in Xcode.
     Edit Scheme... -> Options -> Console -> Choose `Terminal`.
     This way Accessibility permission will be requested from Terminal.

@@ -17,19 +17,19 @@ You can skip parts that are obvious.
 +
 [source,bash]
 ----
-./build-debug.sh
+make build
 ----
 . Run:
 +
 [source,bash]
 ----
-./run-debug.sh
+make run
 ----
 . Optional CLI usage:
 +
 [source,bash]
 ----
-./run-cli.sh --help
+make run-cli
 ----
 
 [#configuring-ddwm]
