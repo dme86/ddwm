@@ -8,6 +8,10 @@ This project exists to preserve a familiar `dwm`-style workflow on macOS, where 
 
 In many business environments, Linux is not available as a daily driver, so this codebase is a pragmatic compromise: a custom, imperfect but productive setup that keeps the essential [look and feel of `dwm`](https://github.com/dme86/dwm).
 
+From my perspective, there is still no better window-management model than `dwm` in day-to-day engineering work.
+
+I also remain skeptical of workflows that adopt macOS only to recreate a Linux-first runtime stack in VMs for container tooling; this project is an attempt to keep the host workflow efficient and predictable without giving up the core `dwm` ergonomics.
+
 The implementation was bootstrapped from ideas and workflows around the macOS tiling ecosystem (including Aerospace), and AI assistance was used during development to accelerate iteration, scripting, and integration work.
 
 ## Installation
@@ -58,7 +62,7 @@ ddwm reload-config
 ## Experimental Swift DwmBar
 
 An experimental native top bar can emulate a classic `dwmbar` look:
-- colors from your `dwm/config.h` (`#222222`, `#bbbbbb`, `#818181`, `#1b1515`)
+- colors from my `dwm/config.h` (`#222222`, `#bbbbbb`, `#818181`, `#1b1515`)
 - fixed right-side order: `... | brew updates | internet | kernel | weather | date | time` (time is right-aligned)
 
 Bar startup:

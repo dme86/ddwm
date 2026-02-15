@@ -9,6 +9,8 @@ final class DwmBarController {
     private var screenChangeObserver: NSObjectProtocol?
     private var windowsByMonitorId: [Int: DwmBarWindow] = [:]
     private let blocksRunner = DwmBarBlocksRunner()
+    private var titleCacheByWindowId: [UInt32: CachedWindowTitle] = [:]
+    private var titleFetchInFlight: Set<UInt32> = []
     private var isStarted = false
 
     private init() {}
@@ -126,6 +128,7 @@ final class DwmBarController {
             ?? NSFont.monospacedSystemFont(ofSize: 12, weight: .regular)
 
         let windows = focus.workspace.allLeafWindowsRecursive
+        cleanupTitleCache(using: windows)
         if windows.isEmpty {
             let placeholder = NSAttributedString(
                 string: " - ",
@@ -135,10 +138,14 @@ final class DwmBarController {
         }
 
         let focusedId = focus.windowOrNil?.windowId
+        let perItemLimit = dynamicTaskTitleLimit(windowCount: windows.count)
         let tokenTexts = windows.map { window -> NSAttributedString in
-            let rawTitle = window.app.name?.takeIf { !$0.isEmpty } ?? "window \(window.windowId)"
-            let title = String(rawTitle.prefix(24))
+            let rawTitle = displayTitle(for: window)
             let isFocused = window.windowId == focusedId
+            let title = abbreviateTaskTitle(
+                rawTitle,
+                maxLength: isFocused ? min(32, perItemLimit + 4) : perItemLimit
+            )
             let attrs: [NSAttributedString.Key: Any] = [
                 .font: font,
                 .foregroundColor: isFocused ? selectedFg : dimmedFg,
@@ -154,6 +161,63 @@ final class DwmBarController {
         for token in tokenTexts.dropFirst(splitIndex) { right.append(token) }
         return (left, right)
     }
+
+    private func displayTitle(for window: Window) -> String {
+        let fallback = window.app.name?.takeIf { !$0.isEmpty } ?? "window \(window.windowId)"
+        let now = Date()
+        if let cached = titleCacheByWindowId[window.windowId],
+           now.timeIntervalSince(cached.updatedAt) <= 15,
+           !cached.title.isEmpty
+        {
+            return cached.title
+        }
+        refreshWindowTitle(window, fallback: fallback)
+        return titleCacheByWindowId[window.windowId]?.title.takeIf { !$0.isEmpty } ?? fallback
+    }
+
+    private func refreshWindowTitle(_ window: Window, fallback: String) {
+        let id = window.windowId
+        guard !titleFetchInFlight.contains(id) else { return }
+        titleFetchInFlight.insert(id)
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            let rawTitle = (try? await window.title)?
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .takeIf { !$0.isEmpty }
+            let nextTitle = rawTitle ?? fallback
+            let prevTitle = self.titleCacheByWindowId[id]?.title
+            self.titleCacheByWindowId[id] = CachedWindowTitle(title: nextTitle, updatedAt: .now)
+            self.titleFetchInFlight.remove(id)
+            if prevTitle != nextTitle {
+                self.refreshFromModel()
+            }
+        }
+    }
+
+    private func cleanupTitleCache(using windows: [Window]) {
+        let alive = Set(windows.map(\.windowId))
+        titleCacheByWindowId = titleCacheByWindowId.filter { alive.contains($0.key) }
+        titleFetchInFlight = titleFetchInFlight.filter { alive.contains($0) }
+    }
+
+    private func dynamicTaskTitleLimit(windowCount: Int) -> Int {
+        let targetTotalChars = 72
+        let count = max(1, windowCount)
+        return max(8, min(24, targetTotalChars / count))
+    }
+
+    private func abbreviateTaskTitle(_ value: String, maxLength: Int) -> String {
+        guard maxLength >= 4 else { return String(value.prefix(maxLength)) }
+        if value.count <= maxLength {
+            return value
+        }
+        return String(value.prefix(maxLength - 3)) + "..."
+    }
+}
+
+private struct CachedWindowTitle {
+    let title: String
+    let updatedAt: Date
 }
 
 func isSwiftDwmBarEnabled() -> Bool {
