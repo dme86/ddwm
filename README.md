@@ -51,15 +51,16 @@ ddwm reload-config
 
 An experimental native top bar can emulate a classic `dwmbar` look:
 - colors from your `dwm/config.h` (`#222222`, `#bbbbbb`, `#818181`, `#1b1515`)
-- fixed right-side order: `... | weather | date | time` (time is right-aligned)
+- fixed right-side order: `... | brew updates | weather | date | time` (time is right-aligned)
 
 Bar startup:
 - starts automatically with `ddwm`
 
 Scripts directory:
 - repo weather script: `script/dwmbar/scripts/weather`
+- repo brew-updates script: `script/dwmbar/scripts/brew_updates`
 - additional executable scripts: `script/dwmbar/scripts/custom`
-- additional scripts are auto-loaded and rendered to the left of weather
+- additional scripts are auto-loaded and rendered to the left of brew-updates
 - fallback outside repo: `~/.config/ddwm/bar/scripts`
 
 Optional env vars:
