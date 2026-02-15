@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Show number of outdated Homebrew packages.
+# 󰏗 = up to date
+# 󰏖 N = updates available
+
+# GUI apps often start with a minimal PATH. Make brew resolution robust.
+BREW_BIN="${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/bin}/brew"
+if [ ! -x "$BREW_BIN" ]; then
+  for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew "$(command -v brew 2>/dev/null)"; do
+    if [ -n "$candidate" ] && [ -x "$candidate" ]; then
+      BREW_BIN="$candidate"
+      break
+    fi
+  done
+fi
+
+if [ ! -x "$BREW_BIN" ]; then
+  exit 0
+fi
+
+# Keep this lightweight for status bar refreshes.
+outdated=$(HOMEBREW_NO_AUTO_UPDATE=1 "$BREW_BIN" outdated --quiet 2>/dev/null)
+num_updates=$(printf "%s\n" "$outdated" | sed '/^$/d' | wc -l | tr -d ' ')
+
+if [ "${num_updates:-0}" -eq 0 ]; then
+  printf "󰏗"
+else
+  printf "󰏖 %s" "$num_updates"
+fi
