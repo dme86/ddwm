@@ -232,6 +232,8 @@ private final class DwmBarBlocksRunner {
     private let scriptsPath: String
     private let customScriptsPath: String
     private let brewUpdateScriptPath: String
+    private let internetScriptPath: String
+    private let kernelVersionScriptPath: String
     private let weatherScriptPath: String
     private var blocks: [DwmBarBlock] = []
 
@@ -244,6 +246,8 @@ private final class DwmBarBlocksRunner {
         scriptsPath = resolveScriptsPath()
         customScriptsPath = "\(scriptsPath)/custom"
         brewUpdateScriptPath = "\(scriptsPath)/brew_updates"
+        internetScriptPath = "\(scriptsPath)/internet"
+        kernelVersionScriptPath = "\(scriptsPath)/kernel_version"
         weatherScriptPath = "\(scriptsPath)/weather"
     }
 
@@ -299,6 +303,8 @@ private final class DwmBarBlocksRunner {
             ))
         }
         result.append(.init(command: scriptRunCommand(brewUpdateScriptPath), intervalSeconds: 3600))
+        result.append(.init(command: scriptRunCommand(internetScriptPath), intervalSeconds: 15))
+        result.append(.init(command: scriptRunCommand(kernelVersionScriptPath), intervalSeconds: 3600))
         result.append(.init(command: scriptRunCommand(weatherScriptPath), intervalSeconds: 1800))
         result.append(.init(command: "date +'%a, %d %b'", intervalSeconds: 1))
         result.append(.init(command: "date +'%H:%M:%S'", intervalSeconds: 1))

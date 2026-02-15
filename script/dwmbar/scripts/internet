@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# macOS network status for ddwm bar
+# Icons:
+# - 󰖩 Wi-Fi
+# - 󰈀 Ethernet
+# - 󰖪 Offline
+
+set -eu
+
+wifi_device=""
+default_if=""
+
+if command -v networksetup >/dev/null 2>&1; then
+  wifi_device=$(networksetup -listallhardwareports 2>/dev/null \
+    | awk '/Hardware Port: (Wi-Fi|AirPort)/ {getline; sub(/^Device: /, ""); print; exit}')
+fi
+
+default_if=$(route -n get default 2>/dev/null | awk '/interface: / {print $2; exit}')
+
+vpn_on=0
+if command -v scutil >/dev/null 2>&1; then
+  if scutil --nc list 2>/dev/null | grep -q "Connected"; then
+    vpn_on=1
+  fi
+fi
+
+out=""
+if [ -z "${default_if}" ]; then
+  out="󰖪"
+elif [ -n "${wifi_device}" ] && [ "${default_if}" = "${wifi_device}" ]; then
+  ssid=$(networksetup -getairportnetwork "$default_if" 2>/dev/null | sed 's/^Current Wi-Fi Network: //')
+  if [ -n "${ssid}" ] && [ "${ssid}" != "You are not associated with an AirPort network." ]; then
+    out="󰖩 ${ssid}"
+  else
+    out="󰖩"
+  fi
+else
+  out="󰈀 ${default_if}"
+fi
+
+if [ "$vpn_on" -eq 1 ]; then
+  out="${out} VPN:on"
+fi
+
+printf "%s" "$out"

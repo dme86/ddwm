@@ -6,6 +6,8 @@ default-root-container-orientation = 'horizontal'
 persistent-workspaces = ["1", "2", "3", "4"]
 
 [mode.main.binding]
+    cmd-shift-enter = 'exec-and-forget open -na Alacritty'
+
     alt-j = 'focus dfs-next'
     alt-k = 'focus dfs-prev'
 
@@ -15,6 +17,7 @@ persistent-workspaces = ["1", "2", "3", "4"]
 
     alt-minus = 'resize smart -5'
     alt-equal = 'resize smart +5'
+    cmd-shift-c = 'close'
 
     cmd-shift-m = 'layout tile monocle'
     alt-comma = 'layout floating tiling'

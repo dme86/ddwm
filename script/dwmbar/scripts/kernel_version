@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Show Darwin kernel version.
+# Glyph: CPU/chip, neutral and fits macOS better than a penguin.
+
+kernel=$(uname -r 2>/dev/null)
+if [ -z "$kernel" ]; then
+  exit 0
+fi
+
+printf "󰍛 %s" "$kernel"

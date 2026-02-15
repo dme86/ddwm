@@ -2,6 +2,14 @@
 
 `ddwm` (Dan's Darwin Window Manager) is a keyboard-driven tiling window manager for macOS with dynamic dwm-style behavior: windows are managed as a deterministic stack per workspace and continuously reflow in `tile` (main + stack) or `monocle` layout.
 
+## Project Motivation
+
+This project exists to preserve a familiar `dwm`-style workflow on macOS, where desktop behavior is significantly more constrained than on Linux.
+
+In many business environments, Linux is not available as a daily driver, so this codebase is a pragmatic compromise: a custom, imperfect but productive setup that keeps the essential [look and feel of `dwm`](https://github.com/dme86/dwm).
+
+The implementation was bootstrapped from ideas and workflows around the macOS tiling ecosystem (including Aerospace), and AI assistance was used during development to accelerate iteration, scripting, and integration work.
+
 ## Installation
 
 ### Build from source
@@ -51,7 +59,7 @@ ddwm reload-config
 
 An experimental native top bar can emulate a classic `dwmbar` look:
 - colors from your `dwm/config.h` (`#222222`, `#bbbbbb`, `#818181`, `#1b1515`)
-- fixed right-side order: `... | brew updates | weather | date | time` (time is right-aligned)
+- fixed right-side order: `... | brew updates | internet | kernel | weather | date | time` (time is right-aligned)
 
 Bar startup:
 - starts automatically with `ddwm`
@@ -59,6 +67,8 @@ Bar startup:
 Scripts directory:
 - repo weather script: `script/dwmbar/scripts/weather`
 - repo brew-updates script: `script/dwmbar/scripts/brew_updates`
+- repo internet script: `script/dwmbar/scripts/internet`
+- repo kernel-version script: `script/dwmbar/scripts/kernel_version`
 - additional executable scripts: `script/dwmbar/scripts/custom`
 - additional scripts are auto-loaded and rendered to the left of brew-updates
 - fallback outside repo: `~/.config/ddwm/bar/scripts`
