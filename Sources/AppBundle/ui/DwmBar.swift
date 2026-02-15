@@ -6,7 +6,6 @@ import Foundation
 final class DwmBarController {
     static let shared = DwmBarController()
 
-    private var barHeight: CGFloat { swiftDwmBarHeight() }
     private var screenChangeObserver: NSObjectProtocol?
     private var windowsByMonitorId: [Int: DwmBarWindow] = [:]
     private let blocksRunner = DwmBarBlocksRunner()
@@ -72,6 +71,7 @@ final class DwmBarController {
 
         for monitor in visibleMonitors {
             guard let screen = appScreensByMonitorId[monitor.monitorAppKitNsScreenScreensId] else { continue }
+            let barHeight = swiftDwmBarHeight(screen: screen)
             let frame = screen.frame
             let barFrame = NSRect(
                 x: frame.minX,
@@ -117,9 +117,13 @@ func isSwiftDwmBarEnabled() -> Bool {
 }
 
 @MainActor
-func swiftDwmBarHeight() -> CGFloat {
-    // Match native menu bar thickness on current macOS and keep a sane minimum.
-    max(22, ceil(NSStatusBar.system.thickness))
+func swiftDwmBarHeight(screen: NSScreen) -> CGFloat {
+    // On notched MacBooks this matches the full menu bar area down to the notch bottom.
+    let fromVisibleFrame = ceil(screen.frame.maxY - screen.visibleFrame.maxY)
+    if fromVisibleFrame > 0 {
+        return fromVisibleFrame
+    }
+    return max(22, ceil(NSStatusBar.system.thickness))
 }
 
 @MainActor
