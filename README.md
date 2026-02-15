@@ -47,6 +47,27 @@ Apply changes:
 ddwm reload-config
 ```
 
+## Experimental Swift DwmBar
+
+An experimental native top bar can emulate a classic `dwmbar` look:
+- colors from your `dwm/config.h` (`#222222`, `#bbbbbb`, `#818181`, `#1b1515`)
+- fixed right-side order: `... | weather | date | time` (time is right-aligned)
+
+Bar startup:
+- starts automatically with `ddwm`
+
+Scripts directory:
+- repo weather script: `script/dwmbar/scripts/weather`
+- additional executable scripts: `script/dwmbar/scripts/custom`
+- additional scripts are auto-loaded and rendered to the left of weather
+- fallback outside repo: `~/.config/ddwm/bar/scripts`
+
+Optional env vars:
+```bash
+# Disable the experimental bar
+export DDWM_ENABLE_SWIFT_DWMBAR=0
+```
+
 ## Basic Usage
 
 Core commands:

@@ -60,6 +60,7 @@ public final class TrayMenuModel: ObservableObject {
         items.insert(mode, at: 0)
     }
     TrayMenuModel.shared.trayItems = items
+    DwmBarController.shared.refreshFromModel()
 }
 
 struct WorkspaceViewModel: Hashable {
