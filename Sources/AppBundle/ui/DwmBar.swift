@@ -189,18 +189,32 @@ private final class DwmBarWindow: NSPanel {
         guard let contentView else { return }
         let bounds = contentView.bounds
         let rightWidth = min(bounds.width * 0.7, rightLabel.intrinsicContentSize.width + 4)
+        let textHeight = max(rightLabelLineHeight(), leftLabelLineHeight())
+        let y = floor((bounds.height - textHeight) / 2)
         rightLabel.frame = NSRect(
             x: bounds.maxX - horizontalPadding - rightWidth,
-            y: 0,
+            y: y,
             width: rightWidth,
-            height: bounds.height
+            height: textHeight
         )
         leftLabel.frame = NSRect(
             x: horizontalPadding,
-            y: 0,
+            y: y,
             width: max(0, rightLabel.frame.minX - horizontalPadding * 2),
-            height: bounds.height
+            height: textHeight
         )
+    }
+
+    private func rightLabelLineHeight() -> CGFloat {
+        guard let font = rightLabel.font else { return 14 }
+        return ceil(font.ascender - font.descender + font.leading)
+    }
+
+    private func leftLabelLineHeight() -> CGFloat {
+        guard leftLabel.attributedStringValue.length > 0 else { return rightLabelLineHeight() }
+        let font = leftLabel.attributedStringValue.attribute(.font, at: 0, effectiveRange: nil) as? NSFont
+        guard let font else { return rightLabelLineHeight() }
+        return ceil(font.ascender - font.descender + font.leading)
     }
 }
 
